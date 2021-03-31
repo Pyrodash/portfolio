@@ -8,6 +8,9 @@ const rootPath = path.join(__dirname, '..')
 const basePath = path.join(rootPath, 'src')
 const mode = process.env.NODE_ENV || 'development'
 
+const siteName = 'Ahmed El-Marakby'
+const siteDescription = 'computer science & random art'
+
 module.exports = {
     mode,
     entry: path.join(basePath, 'index.ts'),
@@ -77,7 +80,27 @@ module.exports = {
     plugins: [
         new VueLoaderPlugin(),
         new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
-        new HtmlWebpackPlugin({ filename: 'index.html' }),
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            title: siteName,
+            meta: {
+                author: siteName,
+                description: siteDescription,
+                'theme-color': '#E85F87',
+                // cross platform/browser stuff
+                viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no',
+                HandheldFriendly: 'True',
+                'apple-mobile-web-app-capable': 'yes',
+                'X-UA-Compatible': { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
+                // open graph
+                'og:type': 'website',
+                'og:site_name': siteName,
+                'og:title': siteName,
+                'og:description': siteDescription,
+                'og:url': 'https://ahmedelmarakby.com',
+                'og:image': 'https://ahmedelmarakby.com/motfd.jpeg',
+            },
+        }),
     ],
     output: {
         filename: '[name].js',
