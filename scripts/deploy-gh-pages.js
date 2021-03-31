@@ -12,7 +12,7 @@ async function deploy() {
         await run('git', ['checkout', '--orphan', 'gh-pages'])
         console.log('Building...')
         await run('npm', ['run', 'build'], {
-            env: { CNAME: process.env.SITE_DOMAIN },
+            env: { ...process.env, CNAME: process.env.SITE_DOMAIN },
         })
         const folderName = existsSync('dist') ? 'dist' : 'build'
         await run('git', ['--work-tree', folderName, 'add', '--all'])
