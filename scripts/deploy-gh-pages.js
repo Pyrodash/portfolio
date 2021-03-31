@@ -18,7 +18,7 @@ async function deploy() {
             `deploy ${version}`,
         ])
         console.log('Pushing to gh-pages...')
-        await run('git', ['push', 'origin', 'HEAD:gh-pages'])
+        await run('git', ['push', 'origin', 'HEAD:gh-pages', '--force'])
         await run('git', ['checkout', '-f', 'master'])
         await run('git', ['branch', '-D', 'gh-pages'])
     } catch (err) {
