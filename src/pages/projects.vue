@@ -3,7 +3,14 @@
         <div class="header">projects</div>
         <div class="project">
             <div class="content">
-                <div class="title">libamf</div>
+                <div class="title">
+                    <a
+                        href="https://github.com/pyrodash/libamf"
+                        target="_blank"
+                    >
+                        libamf
+                    </a>
+                </div>
                 <div class="description">
                     <p>
                         libamf is a node.js library for the purpose of parsing
@@ -45,7 +52,11 @@
                 </div>
             </div>
             <div class="content">
-                <div class="title">Sakura</div>
+                <div class="title">
+                    <a href="https://github.com/sakuraapp" target="_blank">
+                        Sakura
+                    </a>
+                </div>
                 <div class="preview">
                     <img src="~/assets/img/sakura.png" height="400" />
                 </div>
