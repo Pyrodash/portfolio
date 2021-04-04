@@ -127,13 +127,13 @@ if (cname) {
     )
 }
 
-/* if (symlink && path.extname(symlink)) {
+if (symlink && path.extname(symlink)) {
     config.plugins.push(
         new SymlinkWebpackPlugin({
             origin: 'index.html',
             symlink,
         })
     )
-} */
+}
 
 module.exports = config

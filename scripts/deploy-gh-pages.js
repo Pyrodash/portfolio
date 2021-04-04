@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const dotenv = require('dotenv')
 const path = require('path')
-const { existsSync, symlinkSync } = require('fs')
-const { run, rootPath } = require('.')
+const { existsSync } = require('fs')
+const { run } = require('.')
 const { version } = require('../package.json')
 
-dotenv.config({ path: path.join(rootPath, '.env') })
+dotenv.config({ path: path.join(__dirname, '..', '.env') })
 
 async function deploy() {
     try {
@@ -18,14 +18,7 @@ async function deploy() {
                 SYMLINK: '404.html', // symlink 404 page to the index
             },
         })
-
         const folderName = existsSync('dist') ? 'dist' : 'build'
-        const outPath = path.join(rootPath, folderName)
-
-        symlinkSync(
-            path.join(outPath, '404.html'),
-            path.join(outPath, 'index.html')
-        )
         await run('git', ['--work-tree', folderName, 'add', '--all'])
         await run('git', [
             '--work-tree',
