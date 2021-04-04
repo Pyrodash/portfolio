@@ -12,6 +12,8 @@ function codeErr(code) {
     return err
 }
 
+exports.rootPath = defaultCwd
+
 exports.run = function (...args) {
     return new Promise((resolve, reject) => {
         let opts = args[2]
