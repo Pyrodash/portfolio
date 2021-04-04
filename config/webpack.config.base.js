@@ -5,6 +5,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const CnameWebpackPlugin = require('cname-webpack-plugin');
+const SymlinkWebpackPlugin = require('symlink-webpack-plugin');
 
 dotenv.config({ path: path.join(__dirname, '..', '.env') })
 
@@ -18,6 +19,7 @@ const siteDomain = process.env.SITE_DOMAIN
 const siteImage = process.env.SITE_IMAGE
 
 const cname = process.env.CNAME
+const symlink = path.basename(process.env.SYMLINK || '')
 
 const config = {
     mode,
@@ -121,6 +123,15 @@ if (cname) {
     config.plugins.push(
         new CnameWebpackPlugin({
             domain: cname,
+        })
+    )
+}
+
+if (symlink && path.extname(symlink)) {
+    config.plugins.push(
+        new SymlinkWebpackPlugin({
+            origin: 'index.html ',
+            symlink,
         })
     )
 }

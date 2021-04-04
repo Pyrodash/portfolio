@@ -38,6 +38,7 @@
     "html-loader": "^2.1.1",
     "html-webpack-plugin": "^5.2.0",
     "prettier": "^2.2.1",
+    "symlink-webpack-plugin": "^1.1.0",
     "terser-webpack-plugin": "^5.1.1",
     "ts-loader": "^8.0.17",
     "tsconfig-paths-webpack-plugin": "^3.3.0",
