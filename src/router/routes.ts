@@ -1,8 +1,8 @@
-import { RouteConfig } from 'vue-router'
+import { RouteRecordRaw } from 'vue-router'
 
-type VueImport = Promise<typeof import('*.vue')>
+const pages = import.meta.glob('/pages/**/*.vue')
 
-const routes: Array<RouteConfig> = [
+const routes: Array<RouteRecordRaw> = [
     /* {
         path: '/',
         redirect: '/blog',
@@ -11,12 +11,12 @@ const routes: Array<RouteConfig> = [
         //path: '/blog',
         path: '/',
         name: 'blog',
-        component: (): VueImport => import('~/pages/blog.vue'),
+        component: pages['/pages/blog.vue'],
     },
     {
         path: '/projects',
         name: 'projects',
-        component: (): VueImport => import('~/pages/projects.vue'),
+        component: pages['/pages/projects.vue'],
     },
 ]
 

@@ -1,7 +1,7 @@
 {
     "parser": "vue-eslint-parser",
     "extends": [
-        "plugin:vue/essential",
+        "plugin:vue/vue3-essential",
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
         "prettier",
@@ -16,5 +16,7 @@
         "browser": true,
         "node": true
     },
-    "rules": {}
+    "rules": {
+        "vue/no-v-for-template-key": "off"
+    }
 }

@@ -1,10 +1,9 @@
 <template>
     <div class="nav">
-        <template v-for="(item, i) in routes">
+        <template v-for="(item, i) in routes" :key="item.path">
             <router-link
                 class="item"
                 exact-active-class="active"
-                :key="item.path"
                 :to="item.path"
             >
                 {{ item.name }}
@@ -15,8 +14,8 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-export default Vue.extend({
+import { defineComponent } from 'vue'
+export default defineComponent({
     computed: {
         routes() {
             return this.$router.options.routes

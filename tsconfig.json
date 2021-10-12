@@ -4,17 +4,23 @@
         "outDir": "./dist/",
         "paths": {
             "~/*": ["./*"],
-            "@/*": ["./*"]
+            "@/*": ["./*"],
+            "@common/*": ["../../common/*"],
         },
         "sourceMap": true,
         "noImplicitAny": true,
-        "module": "commonjs",
-        "target": "es5",
+        "module": "esnext",
+        "target": "esnext",
+        "moduleResolution": "node",
         "jsx": "react",
         "allowSyntheticDefaultImports": true,
         "resolveJsonModule": true,
         "esModuleInterop": true,
         "allowJs": true,
+        "strict": true,
+        "strictNullChecks": false,
+        "lib": ["esnext", "dom"],
+        "types": ["vite/client"]
     },
-    "exclude": ["node_modules"]
+    "exclude": ["node_modules", "dist"]
 }

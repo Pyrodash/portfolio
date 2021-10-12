@@ -7,11 +7,11 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { defineComponent } from 'vue'
 import Header from '~/components/Header.vue'
 import Navigation from '~/components/Navigation.vue'
 
-export default Vue.extend({
+export default defineComponent({
     components: {
         Header,
         Navigation,
@@ -32,7 +32,7 @@ export default Vue.extend({
     font-size: 1.6em;
 }
 
-.page >>> .header {
+.page :deep(.header) {
     font-weight: bold;
     font-size: 2em;
     margin-bottom: 0.6em;
