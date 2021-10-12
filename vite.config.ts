@@ -4,6 +4,8 @@ import vue from '@vitejs/plugin-vue'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
 const root = join(__dirname, 'src')
+const dist = join(__dirname, 'dist')
+
 const htmlPlugin = (env: Record<string, string>) => {
     return {
         name: 'html-transform',
@@ -27,6 +29,9 @@ export default defineConfig(({ mode }) => {
                 '~': root,
                 '@': root,
             },
+        },
+        build: {
+            outDir: dist,
         },
     }
 })
