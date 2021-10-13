@@ -10,13 +10,19 @@ const routes: Array<RouteRecordRaw> = [
     {
         //path: '/blog',
         path: '/',
-        name: 'blog',
+        name: 'Blog',
         component: pages['/pages/blog.vue'],
     },
     {
         path: '/projects',
-        name: 'projects',
+        name: 'Projects',
         component: pages['/pages/projects.vue'],
+    },
+    {
+        path: '/:pathMatch(.*)*',
+        name: 'NotFound',
+        component: pages['/pages/not_found.vue'],
+        meta: { invisible: true },
     },
 ]
 

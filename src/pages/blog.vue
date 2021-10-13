@@ -2,43 +2,46 @@
     <div class="blog">
         <div class="header">blog</div>
         <div class="posts">
-            <template v-if="posts.length > 0">
-                <div class="post" v-for="post in posts" :key="post.id">
-                    <div class="title">
-                        {{ post.title }}
+            <template v-if="loaded">
+                <template v-if="posts.length > 0">
+                    <div class="post" v-for="post in posts" :key="post.id">
+                        <div class="title">
+                            {{ post.title }}
+                        </div>
+                        <div class="date">
+                            {{ formatDate(post.date) }}
+                        </div>
+                        <div class="content">
+                            <component :is="post.body" />
+                        </div>
                     </div>
-                    <div class="date">
-                        {{ formatDate(post.date) }}
-                    </div>
-                    <div class="content">
-                        {{ post.body }}
-                    </div>
-                </div>
+                </template>
+                <div v-else>nothing to see here.</div>
             </template>
-            <div v-else>nothing to see here.</div>
+            <template v-else>
+                <!-- todo: loading -->
+            </template>
         </div>
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, shallowRef } from 'vue'
+import { MarkdownModule } from 'vite-plugin-markdown'
+
+const posts = import.meta.glob('/posts/*.md')
 
 export default defineComponent({
     data() {
         return {
-            posts: [
-                {
-                    title: 'Hello World',
-                    body: 'hello world',
-                    date: new Date(),
-                },
-                {
-                    title: 'Hello World',
-                    body: 'hello world',
-                    date: new Date(),
-                },
-            ],
+            loaded: false,
+            posts: [],
+            postCount: 0,
         }
+    },
+    mounted() {
+        this.postCount = Object.keys(posts).length
+        this.loadPosts()
     },
     methods: {
         formatDate(date: Date) {
@@ -51,6 +54,25 @@ export default defineComponent({
             day = day.length > 1 ? day : '0' + day
 
             return month + '.' + day + '.' + year
+        },
+        async loadPosts() {
+            const postImports = Object.values(posts).map((postImport) =>
+                postImport()
+            ) as Array<Promise<MarkdownModule>>
+
+            Promise.all(postImports).then((postModules) => {
+                for (const postModule of postModules) {
+                    const { attributes, VueComponent } = postModule
+
+                    this.posts.push({
+                        title: attributes.title,
+                        date: new Date(Number(attributes.date)),
+                        body: shallowRef(VueComponent),
+                    })
+                }
+
+                this.loaded = true
+            })
         },
     },
 })
@@ -73,5 +95,15 @@ export default defineComponent({
     margin-bottom: 1.4em;
     padding-bottom: 1.4em;
     border-bottom: 1px solid rgb(255, 255, 255, 0.1);
+}
+
+.post :deep(img) {
+    max-width: 100%;
+    height: auto;
+}
+
+.post :deep(a) {
+    color: #15bbf0;
+    /* font-weight: bold; */
 }
 </style>

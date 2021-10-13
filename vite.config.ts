@@ -2,6 +2,7 @@ import { defineConfig, loadEnv } from 'vite'
 import { join } from 'path'
 import vue from '@vitejs/plugin-vue'
 import tsconfigPaths from 'vite-tsconfig-paths'
+import mdPlugin, { Mode } from 'vite-plugin-markdown'
 
 const root = join(__dirname, 'src')
 const dist = join(__dirname, 'dist')
@@ -22,7 +23,12 @@ export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, root)
 
     return {
-        plugins: [vue(), tsconfigPaths({ root: __dirname }), htmlPlugin(env)],
+        plugins: [
+            vue(),
+            tsconfigPaths({ root: __dirname }),
+            htmlPlugin(env),
+            mdPlugin({ mode: [Mode.VUE] }),
+        ],
         root,
         resolve: {
             alias: {

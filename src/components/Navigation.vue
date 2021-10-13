@@ -18,7 +18,9 @@ import { defineComponent } from 'vue'
 export default defineComponent({
     computed: {
         routes() {
-            return this.$router.options.routes
+            return this.$router.options.routes.filter(
+                (route) => !route.meta || route.meta.invisible !== true
+            )
         },
         activeRoute() {
             return this.$router.currentRoute
@@ -42,6 +44,7 @@ export default defineComponent({
 
 .item {
     color: #e85f87;
+    text-transform: lowercase;
 }
 .item.active {
     font-weight: bold;
