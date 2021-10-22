@@ -13,8 +13,9 @@
                 hi, i'm <span class="highlighted">ahmed</span>
             </div>
             <div class="body">
-                I'm a full stack programmer from Egypt. I'm currently a senior
-                in high school. I like music, videogames and tech.
+                I'm a full stack programmer from Egypt. I'm currently studying
+                Software Engineering at Cairo University. I like music,
+                videogames and tech.
             </div>
             <div class="links old">
                 <a
